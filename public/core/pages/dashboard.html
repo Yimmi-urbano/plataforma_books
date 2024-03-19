@@ -58,8 +58,8 @@
             }, []);
 
             user = allItems;
-
             $update();
+            $f7.params.utils.closeLoader();
           } else {
             console.error("Los datos recibidos no son válidos");
           }
