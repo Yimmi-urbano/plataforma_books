@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>  <%= slug %></title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
+  <script src="/public/core/epub/dist/epub.js"></script>
+
+  <script type="text/javascript">
+    window.hypothesisConfig = function () {
+      return {
+        openSidebar: false,
+        enableMultiFrameSupport: false,
+        onLayoutChange: function(state) {
+          var nav = document.getElementById("navigation");
+          if (state.expanded === true) {
+            nav.classList.remove("open");
+          }
+        }
+      };
+    };
+  </script>
+  
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/public/core/epub/hypothesis.css">
+
+  <script src="/public/core/epub/hypothesis.js?=1571212212"></script>
+
+</head>
+<body>
+  <div id="main">
+    <a id="opener">
+      <i class="material-icons">menu</i>
+    </a>
+    <a href="/#!/dashboard" id="volver">
+        <span class="material-icons">
+            keyboard_return
+            </span>
+      </a>
+    <div id="viewer" class="spreads"></div>
+    <span id="hiddenTitle"></span>
+    <a id="prev" href="#prev" class="arrow">
+      <i class="material-icons">chevron_left</i>
+    </a>
+    <a id="next" href="#next" class="arrow">
+      <i class="material-icons">chevron_right</i>
+    </a>
+  </div>
+  <div id="navigation">
+    <a id="closer">
+      <i class="material-icons">close</i>
+    </a>
+    <h1 id="title">...</h1>
+    <image id="cover" width="150px"/>
+    <h2 id="author">...</h2>
+    <ul id="toc"></ul>
+  </div>
+<script>
+    
+    function validarToken() {
+        var jwtToken = localStorage.getItem("jwtToken");
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Bearer "+jwtToken);
+
+    var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        redirect: 'follow'
+    };
+
+    fetch("https://books.creceidea.com/wp-json/jwt-auth/v1/token/validate", requestOptions)
+    .then(response => response.json())
+    .then(result => {
+        if (result.code === "jwt_auth_valid_token") {
+            console.log("Token válido");
+            // Aquí puedes realizar otras acciones si el token es válido
+        } else if (result.code === "jwt_auth_invalid_token") {
+            console.log("Token inválido");
+            // Aquí rediriges al usuario a una URL válida, por ejemplo:
+           // window.location.href = "https://alls.cloud/editorialpelesta/";
+        } else {
+            console.log("Respuesta desconocida");
+        }
+    })
+    .catch(error => console.log('error', error));
+}
+
+// Llama a la función para validar el token
+validarToken();
+
+document.addEventListener('DOMContentLoaded', start('<%= bookId %>'), false);
+</script>
+</body>
+</html>

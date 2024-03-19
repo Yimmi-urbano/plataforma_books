@@ -1,0 +1,121 @@
+<template>
+  <div class="page">
+    <div class="page-content dashboard-page">
+
+   
+      <div class="estadisticas">
+
+   
+        <ul class='list-inline'>
+          ${user.length > 0
+            ? user.map((item) => $h` <li class='book'>
+                  <a href="/book/${item.sku}/${item.name}" class="link-href external">
+                      <img class="product-image" src="${item.image}" alt="${item.name}"/>
+                      <h3 class="product-title">${item.name}</h3>
+                  </a>
+                  </li>
+              `)
+            : $h`<li class='book'>No hay productos disponibles</li>`
+          }
+        </ul>
+  
+
+  
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+</template>
+
+
+<script>
+
+export default (props, { $on, $f7, $update }) => {
+  // empty initial user data
+  let user = [];
+ 
+  var jwtToken = localStorage.getItem("token");
+  $on('pageInit', () => {
+    // request user data on page init
+    fetch('https://books.creceidea.com/wp-json/wc/v3/orders?customer=2', {
+      headers: {
+        'Authorization': 'Bearer '+jwtToken
+      }
+    })
+    .then((res) => res.json())
+    .then((data) => {
+    if (data && Array.isArray(data)) {
+        // Filtrar las órdenes con estado "completed"
+        const completedOrders = data.filter(order => order.status === 'completed');
+
+        // Listar directamente los items de todas las órdenes completadas
+        const allItems = completedOrders.reduce((accumulator, order) => {
+            return accumulator.concat(order.line_items.map(item => ({
+                name: item.name,
+                price: item.price,
+                sku:item.sku,
+                image: item.image.src
+            })));
+        }, []);
+
+        user = allItems;
+
+        // Actualizar la interfaz de usuario
+        $update();
+    } else {
+        console.error("Los datos recibidos no son válidos");
+    }
+});
+
+  })
+
+  return $render;
+}
+
+ /*
+  export default (props, { $, $f7 }) => {
+   
+    const app = $f7;
+    let dataCompany;
+
+    app.on('pageAfterIn', async (page) => {
+      const userId = sessionStorage.getItem('userId') || null;
+
+      try {
+        const infoCompany = await $f7.params.utils.detailCompany(userId);
+        dataCompany = infoCompany[0];
+        sessionStorage.setItem('typeCompany', dataCompany.typeCompany)
+        sessionStorage.setItem('typeService', dataCompany.typeService)
+
+      } catch (error) {
+        console.log('Error:', error);
+      }
+      
+      app.panel.create({
+        el: '.panel-left',
+        on: {
+          opened: $f7.params.utils.menuPanel()
+        },
+        visibleBreakpoint: 1024
+      });
+      var qrcodeDiv = document.getElementById("qrcode");
+      var urlParaCodificar = `https://${dataCompany.domain}`;
+      var opcionesQR = {
+        text: urlParaCodificar,
+        width: 128,
+        height: 128,
+      };
+
+      var qrcode = new QRCode(qrcodeDiv, opcionesQR);
+
+
+    });
+
+    return $render;
+  };
+*/
+</script>

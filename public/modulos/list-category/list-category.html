@@ -1,0 +1,192 @@
+<template>
+  <div class="page">
+    <div class="navbar">
+      <div class="navbar-bg"></div>
+      <div class="navbar-inner sliding">
+        <div class="title">List Category</div>
+      </div>
+    </div>
+    <div class="page-content">
+      <div class="block">
+        
+
+      <div class="row">
+        <div class="medium-80 col-50">
+            <div class="block-title">Alternate header with row actions</div>
+            <div class="data-table data-table-init card card-raised card-outline">
+              <div class="card-header">
+                <div class="data-table-links hidden d-none">
+                  <a class="link">Add</a>
+                  <a class="link">Remove</a>
+                </div>
+                <div class="data-table-actions">
+                  <a class="link icon-only">
+                    <i class="icon f7-icons if-not-md">line_horizontal_3_decrease</i>
+                    <i class="icon material-icons md-only">sort</i>
+                  </a>
+                  <a class="link icon-only">
+                    <i class="icon f7-icons if-not-md">ellipsis_vertical_circle</i>
+                    <i class="icon material-icons md-only">more_vert</i>
+                  </a>
+                </div>
+              </div>
+              <div class="card-content">
+                <table>
+                  <thead>
+                    <tr>
+                      <th class="checkbox-cell">
+                        <label class="checkbox">
+                          <input type="checkbox" />
+                          <i class="icon-checkbox"></i>
+                        </label>
+                      </th>
+                      <th class="label-cell">Dessert (100g serving)</th>
+                      <th class="numeric-cell">Calories</th>
+                      <th class="numeric-cell">Fat (g)</th>
+                      <th class="numeric-cell">Carbs</th>
+                      <th class="numeric-cell">Protein (g)</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="checkbox-cell">
+                        <label class="checkbox">
+                          <input type="checkbox" />
+                          <i class="icon-checkbox"></i>
+                        </label>
+                      </td>
+                      <td class="label-cell">Frozen yogurt</td>
+                      <td class="numeric-cell">159</td>
+                      <td class="numeric-cell">6.0</td>
+                      <td class="numeric-cell">24</td>
+                      <td class="numeric-cell">4.0</td>
+                      <td class="actions-cell">
+                        <a class="link icon-only">
+                          <i class="icon f7-icons if-not-md">square_pencil</i>
+                          <i class="icon material-icons md-only">edit</i>
+                        </a>
+                        <a class="link icon-only">
+                          <i class="icon f7-icons if-not-md">trash</i>
+                          <i class="icon material-icons md-only">delete</i>
+                        </a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="checkbox-cell">
+                        <label class="checkbox">
+                          <input type="checkbox" />
+                          <i class="icon-checkbox"></i>
+                        </label>
+                      </td>
+                      <td class="label-cell">Ice cream sandwich</td>
+                      <td class="numeric-cell">237</td>
+                      <td class="numeric-cell">9.0</td>
+                      <td class="numeric-cell">37</td>
+                      <td class="numeric-cell">4.4</td>
+                      <td class="actions-cell">
+                        <a class="link icon-only">
+                          <i class="icon f7-icons if-not-md">square_pencil</i>
+                          <i class="icon material-icons md-only">edit</i>
+                        </a>
+                        <a class="link icon-only">
+                          <i class="icon f7-icons if-not-md">trash</i>
+                          <i class="icon material-icons md-only">delete</i>
+                        </a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="checkbox-cell">
+                        <label class="checkbox">
+                          <input type="checkbox" />
+                          <i class="icon-checkbox"></i>
+                        </label>
+                      </td>
+                      <td class="label-cell">Eclair</td>
+                      <td class="numeric-cell">262</td>
+                      <td class="numeric-cell">16.0</td>
+                      <td class="numeric-cell">24</td>
+                      <td class="numeric-cell">6.0</td>
+                      <td class="actions-cell">
+                        <a class="link icon-only">
+                          <i class="icon f7-icons if-not-md">square_pencil</i>
+                          <i class="icon material-icons md-only">edit</i>
+                        </a>
+                        <a class="link icon-only">
+                          <i class="icon f7-icons if-not-md">trash</i>
+                          <i class="icon material-icons md-only">delete</i>
+                        </a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="checkbox-cell">
+                        <label class="checkbox">
+                          <input type="checkbox" />
+                          <i class="icon-checkbox"></i>
+                        </label>
+                      </td>
+                      <td class="label-cell">Cupcake</td>
+                      <td class="numeric-cell">305</td>
+                      <td class="numeric-cell">3.7</td>
+                      <td class="numeric-cell">67</td>
+                      <td class="numeric-cell">4.3</td>
+                      <td class="actions-cell">
+                        <a class="link icon-only">
+                          <i class="icon f7-icons if-not-md">square_pencil</i>
+                          <i class="icon material-icons md-only">edit</i>
+                        </a>
+                        <a class="link icon-only">
+                          <i class="icon f7-icons if-not-md">trash</i>
+                          <i class="icon material-icons md-only">delete</i>
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+         
+
+          <div class="medium-20 col-50">
+            ssss
+          </div>
+        </div>
+
+      </div>
+     
+
+   
+
+    </div>
+  
+  </div>
+</template>
+<script>
+  export default (props, { $, $f7 }) => {
+
+    const app = $f7;
+
+    app.on('pageBeforeIn', async (page) => {
+
+      const ownerID= 'RH000120231118';
+
+      try {
+       // const infoCategory = await $f7.params.getApi.createComponentRouter(ownerID);
+    
+       // console.log(infoCategory)
+
+      } catch (error) {
+        console.log('Error:', error);
+      }
+
+
+
+    })
+
+
+
+
+    return $render;
+  };
+</script>

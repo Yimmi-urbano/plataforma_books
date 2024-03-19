@@ -1,0 +1,144 @@
+<template>
+  <div class="page category">
+    <div class="page-content">
+
+      <div class="row">
+        <div class="medium-70 col-100">
+
+          <div class="blocked">
+
+            <div class="row list_category">
+              <div class="medium-100 col-100">
+                <div class="block-title">${title}</div>
+              </div>
+              ${datos.map((data) => $h`
+              <div class="medium-33 col-50">
+                <div
+                  class="card card-raised bg-card-category ${data.categorySituation === 'Conforme' ? 'conforme-class' : 'no-conforme-class'}">
+                  <div class="card-header">${data.categoryName}</div>
+                  <div class="card-content card-content-padding">${data.categoryFeatures} </div>
+                  <div class="card-footer">
+                    <div class="chip">
+                      <div class="chip-label">${data.categorySituation}</div>
+                    </div>
+                    <div class="actions-mod-category">
+                      <a class="link icon-only">
+                        <i class="icon f7-icons if-not-md">square_pencil</i>
+                        <i class="icon material-icons md-only">edit</i>
+                      </a>
+                      <a class="link icon-only">
+                        <i class="icon f7-icons if-not-md">trash</i>
+                        <i class="icon material-icons md-only">delete</i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              `)}
+            </div>
+          </div>
+        </div>
+
+
+        <div class="medium-30 col-100">
+          <div class="bg-card-sidebar">
+            <div class="row">
+              <div class="medium-100 col-100">
+                <div class="block-title">Agregar/Editar</div>
+              </div>
+            </div>
+            <div class="blocked">
+
+              <div class="list inset-ios">
+
+                <ul>
+                  <li class="item-content item-input item-input-outline">
+                  
+                    <div class="item-inner">
+                      <div class="item-title item-label">Titulo</div>
+                      <div class="item-input-wrap">
+                        <input type="text" placeholder="Titulo" />
+                        <span class="input-clear-button"></span>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="item-content item-input item-input-outline">
+                
+                    <div class="item-inner">
+                      <div class="item-title item-label">Características</div>
+                      <div class="item-input-wrap">
+                        <input type="text" placeholder="Características" />
+                        <span class="input-clear-button"></span>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="item-content item-input item-input-outline">
+                  
+                    <div class="item-inner">
+                      <div class="item-title item-label">Estado</div>
+                      <div class="item-input-wrap input-dropdown-wrap">
+                        <select placeholder="Seleccione ...">
+                          <option value="Conforme">Conforme</option>
+                          <option value="Suspendido">Suspendido</option>
+                        </select>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="item-content item-input item-input-outline">
+                  
+                    <div class="item-inner">
+                      <div class="item-title item-label">Imagen</div>
+                      <div class="item-input-wrap">
+                        <input type="file" placeholder="URL" />
+                        <span class="input-clear-button"></span>
+                      </div>
+                    </div>
+                  </li>
+
+
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</template>
+
+<!-- Component styles -->
+<style>
+  .red-link {
+    color: red;
+  }
+</style>
+
+<script>
+  export default (props, { $f7, $on, $update }) => {
+    const title = 'Lista de Categorias';
+    let datos = [];
+
+    $on('pageInit', () => {
+      $f7.params.utils.openLoader();
+      $f7.params.utils
+        .listCategory('RH000120231118')
+        .then((data) => {
+          datos = data[0];
+          $update();
+        })
+        .catch((error) => {
+          console.error('Error fetching data:', error);
+        })
+        .finally(() => {
+          $f7.params.utils.closeLoader();
+        });
+    });
+
+    $on('pageAfterOut', () => { });
+
+    return $render;
+  }
+</script>
