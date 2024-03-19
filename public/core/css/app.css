@@ -2548,7 +2548,7 @@ background: var(--color-bg-left-sidegar);
 
 
 
-ul {
+ul.list-inline {
   display: table-cell;
   vertical-align: middle;
 }
