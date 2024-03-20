@@ -2378,7 +2378,7 @@ code {
 .dashboard-page .estadisticas {
   background-color: #797c7d;
   min-height:75vh;
-  padding: 50px;
+  padding: 20px;
 }
 
 
@@ -2390,7 +2390,10 @@ code {
   .desktop-only {
     display: block;
   }
+
+  
 }
+
 
 .mserror {
 
@@ -2546,8 +2549,6 @@ background: var(--color-bg-left-sidegar);
   border-bottom-right-radius: 5px;
 }
 
-
-
 ul.list-inline {
   display: table-cell;
   vertical-align: middle;
@@ -2559,12 +2560,27 @@ ul.list-inline {
 }
 .list-inline > li {
   display: inline-block;
-  margin-left: 2em;
+
 }
 .list-inline > li:first-child {
   margin-left: 0;
 }
 
+.list-inline > li {
+  margin-right: 2em;
+}
+
+@media (max-width: 468px) {
+
+  .list-inline > li:nth-child(2n) {
+    margin-left: 2em;
+  }
+  
+  .list-inline > li {
+    margin-right: 0em;
+  }
+  }
+  
 .book {
   cursor: pointer;
   display: block;
