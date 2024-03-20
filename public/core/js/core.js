@@ -99,7 +99,7 @@ app.on('pageAfterIn', async function (page) {
 
   function handleAuthenticatedPage() {
 
-    const name = sessionStorage.getItem('user_display_name');
+    const name = localStorage.getItem('user_display_name');
     $('#name').text(name);
     $('footer').show();
     $('header').show()
