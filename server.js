@@ -13,11 +13,14 @@ app.get('/', async (req, res) => {
   res.render('index', { title: 'StartSyncX', url_api_category:'ss' });
 });
 
+
 // Definición de la ruta en Express.js
 app.get('/book/:id/:slug', async (req, res) => {
   const id = req.params.id; 
   const slug = req.params.slug; 
-  res.render('book-read', { title: 'StartSyncX', url_api_category: 'mybooks', bookId: id, slug:slug });
+  const owner= req.params.owner;
+
+  res.render('book-read', { title: 'StartSyncX', owner: owner, bookId: id, slug:slug });
 });
 
 app.use('/public', express.static(path.join(__dirname, 'public')));

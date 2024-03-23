@@ -1,9 +1,6 @@
 import { loginAuth, registerUser, validarToken } from '../../modulos/login/session.js';
-import { registerStore } from '../../modulos/company/register.js'
 import { openLoader, closeLoader } from './utils.js';
-import { detailBooks } from "../../modulos/company/getCompany.js";
 import { routers } from './routes.js';
-import { listCategory } from '../../modulos/list-category/list-category.js';
 
 
 const $ = Dom7;
@@ -20,10 +17,7 @@ export const app = new Framework7({
   utils: {
     closeLoader,
     openLoader,
-    registerUser,
-    registerStore,
-    detailBooks,
-    listCategory
+    registerUser
 
   },
   popup: {
@@ -49,14 +43,21 @@ app.on('pageAfterIn', async function (page) {
   async function redirectDashboard() {
 
     try {
-      const datosResulta = await validarToken();
+      const statRsp = await validarToken();
       closeLoader();
-      if (datosResulta) {
-        page.router.navigate('/dashboard/');
+      if (statRsp) {
+        var skuprop = localStorage.getItem("sku");
+        console.log(skuprop)
+        const urlget= `/book/${skuprop}/asdasdad`;
+        window.location.href = urlget;
+        //page.router.navigate(urlget);
 
+      } else {
+        closeLoader();
       }
     } catch (error) {
       console.error("Error al validar el token:", error);
+      closeLoader();
     }
 
   }
@@ -69,9 +70,12 @@ app.on('pageAfterIn', async function (page) {
       if (!datosResulta) {
         page.router.navigate('/login/');
 
+      } else {
+        closeLoader();
       }
     } catch (error) {
       console.error("Error al validar el token:", error);
+      closeLoader();
     }
   }
 

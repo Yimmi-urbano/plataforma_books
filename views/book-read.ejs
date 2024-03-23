@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>  <%= slug %></title>
+  <title> <%= owner %> | <%= slug %>    </title>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
   <script src="/public/core/epub/dist/epub.js"></script>
@@ -60,6 +60,8 @@
   </div>
 <script>
     
+    const owner = "<%=owner%>";
+
     function validarToken() {
         var jwtToken = localStorage.getItem("jwtToken");
     var myHeaders = new Headers();
@@ -71,7 +73,7 @@
         redirect: 'follow'
     };
 
-    fetch("https://books.creceidea.com/wp-json/jwt-auth/v1/token/validate", requestOptions)
+    fetch(`https://${owner}.creceidea.com/wp-json/jwt-auth/v1/token/validate`, requestOptions)
     .then(response => response.json())
     .then(result => {
         if (result.code === "jwt_auth_valid_token") {
