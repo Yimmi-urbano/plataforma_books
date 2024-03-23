@@ -111,6 +111,9 @@ async function validarToken() {
     } else if (result.status === false) {
       console.log("Token inválido");
 
+      const urlget= `/#!/login`;
+        window.location.href = urlget;
+
     } else {
       console.log("Respuesta desconocida");
     }
