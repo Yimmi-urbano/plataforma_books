@@ -6,7 +6,7 @@
   <title> <%= owner %> | <%= slug %>    </title>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
-  <script src="/public/core/epub/dist/epub.js"></script>
+  <script src="https://startsyncx.com/public/core/epub/dist/epub.js"></script>
 
   <script type="text/javascript">
     window.hypothesisConfig = function () {
@@ -25,9 +25,9 @@
   
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="/public/core/epub/hypothesis.css">
+  <link rel="stylesheet" type="text/css" href="https://startsyncx.com/public/core/epub/hypothesis.css">
 
-  <script src="/public/core/epub/hypothesis.js?=1571212212"></script>
+  <script src="https://startsyncx.com/public/core/epub/hypothesis.js?=1571212212"></script>
 
 </head>
 <body>
@@ -59,39 +59,6 @@
     <ul id="toc"></ul>
   </div>
 <script>
-    
-    const owner = "<%=owner%>";
-
-    function validarToken() {
-        var jwtToken = localStorage.getItem("jwtToken");
-    var myHeaders = new Headers();
-    myHeaders.append("Authorization", "Bearer "+jwtToken);
-
-    var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        redirect: 'follow'
-    };
-
-    fetch(`https://${owner}.creceidea.com/wp-json/jwt-auth/v1/token/validate`, requestOptions)
-    .then(response => response.json())
-    .then(result => {
-        if (result.code === "jwt_auth_valid_token") {
-            console.log("Token válido");
-            // Aquí puedes realizar otras acciones si el token es válido
-        } else if (result.code === "jwt_auth_invalid_token") {
-            console.log("Token inválido");
-            // Aquí rediriges al usuario a una URL válida, por ejemplo:
-           // window.location.href = "https://alls.cloud/editorialpelesta/";
-        } else {
-            console.log("Respuesta desconocida");
-        }
-    })
-    .catch(error => console.log('error', error));
-}
-
-// Llama a la función para validar el token
-validarToken();
 
 document.addEventListener('DOMContentLoaded', start('<%= bookId %>'), false);
 </script>
