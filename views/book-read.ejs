@@ -60,7 +60,71 @@
   </div>
 <script>
 
+function obtenerTokenDeURL() {
+  var url = window.location.href;
+  var parametros = url.split('?')[1];
+  if (parametros) {
+      var tokens = parametros.split('&');
+      for (var i = 0; i < tokens.length; i++) {
+          var token = tokens[i].split('=');
+          if (token[0] === 'token') {
+              return token[1];
+          }
+      }
+  }
+  return null;
+}
+
+async function almacenarTokenEnLocalStorage() {
+  var token = obtenerTokenDeURL();
+  if (token) {
+      localStorage.setItem("token", token);
+      return true
+  }
+}
+
+async function validarToken() {
+  try {
+
+  const saveToken= await almacenarTokenEnLocalStorage();
+
+    var jwtToken = localStorage.getItem("token");
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Bearer " + jwtToken);
+
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow'
+    };
+
+    const response = await fetch("https://api.startsyncx.com/api/secure", requestOptions);
+    const result = await response.json();
+
+    if (result.status === true) {
+
+      const sku = result.authData.user.sku[0]
+      localStorage.setItem("sku", sku);
+
+      return true;
+
+    } else if (result.status === false) {
+      console.log("Token inválido");
+
+    } else {
+      console.log("Respuesta desconocida");
+    }
+
+
+  } catch (error) {
+    console.error('Error en la solicitud fetch:', error);
+    throw error;
+  }
+}
+
 document.addEventListener('DOMContentLoaded', start('<%= bookId %>'), false);
+
+
 </script>
 </body>
 </html>

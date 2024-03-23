@@ -35,19 +35,15 @@ export async function loginAuth(username, password) {
 
 }
 
-// Obtener el parámetro "token" de la URL
-function obtenerTokenDeURL() {
-  // Obtener la URL actual
-  var url = window.location.href;
 
-  // Buscar el parámetro "token" en la URL
+function obtenerTokenDeURL() {
+  var url = window.location.href;
   var parametros = url.split('?')[1];
   if (parametros) {
       var tokens = parametros.split('&');
       for (var i = 0; i < tokens.length; i++) {
           var token = tokens[i].split('=');
           if (token[0] === 'token') {
-              // Devolver el token del token
               return token[1];
           }
       }
@@ -55,18 +51,13 @@ function obtenerTokenDeURL() {
   return null;
 }
 
-// Almacenar el token en localStorage si se encuentra en la URL
 async function almacenarTokenEnLocalStorage() {
   var token = obtenerTokenDeURL();
   if (token) {
       localStorage.setItem("token", token);
-      // Redirigir a la misma URL sin el parámetro "token"
-      //window.location.href = window.location.pathname;
       return true
   }
 }
-
-
 
 
 
