@@ -85,14 +85,14 @@ export async function validarToken() {
       redirect: 'follow'
     };
 
-    const response = await fetch("http://localhost:3000/api/secure", requestOptions);
+    const response = await fetch("https://api.startsyncx.com/api/secure", requestOptions);
     const result = await response.json();
 
     if (result.status === true) {
 
       const sku = result.authData.user.sku[0]
       localStorage.setItem("sku", sku);
-      
+
       return true;
 
     } else if (result.status === false) {
