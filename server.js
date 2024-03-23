@@ -18,9 +18,8 @@ app.get('/', async (req, res) => {
 app.get('/book/:id/:slug', async (req, res) => {
   const id = req.params.id; 
   const slug = req.params.slug; 
-  const owner= req.params.owner;
 
-  res.render('book-read', { title: 'StartSyncX', owner: owner, bookId: id, slug:slug });
+  res.render('book-read', { title: 'StartSyncX', bookId: id, slug:slug });
 });
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
