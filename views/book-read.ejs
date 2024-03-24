@@ -60,33 +60,11 @@
   </div>
 <script>
 
-function obtenerTokenDeURL() {
-  var url = window.location.href;
-  var parametros = url.split('?')[1];
-  if (parametros) {
-      var tokens = parametros.split('&');
-      for (var i = 0; i < tokens.length; i++) {
-          var token = tokens[i].split('=');
-          if (token[0] === 'token') {
-              return token[1];
-          }
-      }
-  }
-  return null;
-}
 
-async function almacenarTokenEnLocalStorage() {
-  var token = obtenerTokenDeURL();
-  if (token) {
-      localStorage.setItem("token", token);
-      return true
-  }
-}
+
 
 async function validarToken() {
   try {
-
-  const saveToken= await almacenarTokenEnLocalStorage();
 
     var jwtToken = localStorage.getItem("token");
     var myHeaders = new Headers();
