@@ -6,7 +6,7 @@
   <title> <%= slug %>    </title>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
-  <script src="https://startsyncx.com/public/core/epub/dist/epub.js"></script>
+  <script src="../../public/core/epub/dist/epub.js"></script>
 
   <script type="text/javascript">
     window.hypothesisConfig = function () {
@@ -25,9 +25,9 @@
   
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="https://startsyncx.com/public/core/epub/hypothesis.css">
+  <link rel="stylesheet" type="text/css" href="../../public/core/epub/hypothesis.css">
 
-  <script src="https://startsyncx.com/public/core/epub/hypothesis.js?=1571212212"></script>
+  <script src="../../public/core/epub/hypothesis.js?=1571212212"></script>
 
 </head>
 <body>
@@ -62,9 +62,9 @@
 
 
 
-
 async function validarToken() {
   try {
+
 
     var jwtToken = localStorage.getItem("token");
     var myHeaders = new Headers();
@@ -81,8 +81,6 @@ async function validarToken() {
 
     if (result.status === true) {
 
-      const sku = result.authData.user.sku[0]
-      localStorage.setItem("sku", sku);
 
       return true;
 
