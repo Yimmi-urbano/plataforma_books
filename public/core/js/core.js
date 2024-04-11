@@ -48,7 +48,7 @@ app.on('pageAfterIn', async function (page) {
       if (statRsp) {
         var skuprop = localStorage.getItem("sku");
         console.log(skuprop)
-        const urlget= `/book/${skuprop}/asdasdad`;
+        const urlget= `/book/${skuprop}/e-book-digital`;
         window.location.href = urlget;
         //page.router.navigate(urlget);
 
