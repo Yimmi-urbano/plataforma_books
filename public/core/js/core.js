@@ -2,7 +2,6 @@ import { loginAuth, registerUser, validarToken } from '../../modulos/login/sessi
 import { openLoader, closeLoader } from './utils.js';
 import { routers } from './routes.js';
 
-
 const $ = Dom7;
 const theme = 'ios';
 export const app = new Framework7({
@@ -18,7 +17,6 @@ export const app = new Framework7({
     closeLoader,
     openLoader,
     registerUser
-
   },
   popup: {
     closeOnEscape: true,
@@ -41,16 +39,16 @@ export const app = new Framework7({
 app.on('pageAfterIn', async function (page) {
 
   async function redirectDashboard() {
-
     try {
       const statRsp = await validarToken();
+
       closeLoader();
+      
       if (statRsp) {
+
         var skuprop = localStorage.getItem("sku");
-        console.log(skuprop)
-        const urlget= `/book/${skuprop}/e-book-digital`;
+        const urlget = `/book/${skuprop}/e-book-digital`;
         window.location.href = urlget;
-        //page.router.navigate(urlget);
 
       } else {
         closeLoader();
