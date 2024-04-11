@@ -9,7 +9,7 @@ app.set('views', __dirname + '/views');
 const get_ = require('./services');
 app.use(cors()); 
 
-// Ruta para servir la página HTML
+// Ruta para servir la página HTML de inicio
 app.get('/', async (req, res) => {
   res.render('index', { title: 'StartSyncX', url_api_category:'ss' });
 });
@@ -24,8 +24,8 @@ app.get('/book/:id/:slug', async (req, res) => {
 // Ruta para servir archivos estáticos (CSS, imágenes, etc.)
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
-// Ruta para manejar todas las demás solicitudes y redirigirlas a la página principal
-app.get('*', async (req, res) => {
+// Middleware para redirigir todas las demás solicitudes a la página principal
+app.use((req, res) => {
   res.redirect('/');
 });
 
