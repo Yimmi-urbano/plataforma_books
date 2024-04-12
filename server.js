@@ -13,7 +13,7 @@ app.get('/', async (req, res) => {
   res.render('index', { title: 'StartSyncX', url_api_category:'ss' });
 });
 
-app.get('/book/:id/:slug/?loc=:name', async (req, res) => {
+app.get('/book/:id/:slug', async (req, res) => {
   const id = req.params.id; 
   const slug = req.params.slug; 
   res.render('book-read', { title: 'StartSyncX', bookId: id, slug:slug });
