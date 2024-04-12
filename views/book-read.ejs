@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> <%= slug %>    </title>
+  <title>
+    <%= slug %>
+  </title>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
   <script src="../../public/core/epub/dist/epub.js"></script>
@@ -13,7 +16,7 @@
       return {
         openSidebar: false,
         enableMultiFrameSupport: false,
-        onLayoutChange: function(state) {
+        onLayoutChange: function (state) {
           var nav = document.getElementById("navigation");
           if (state.expanded === true) {
             nav.classList.remove("open");
@@ -22,7 +25,7 @@
       };
     };
   </script>
-  
+
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="../../public/core/epub/hypothesis.css">
@@ -30,16 +33,17 @@
   <script src="../../public/core/epub/hypothesis.js?=1571212212"></script>
 
 </head>
+
 <body>
   <div id="main">
     <a id="opener">
       <i class="material-icons">menu</i>
     </a>
     <a href="/#!/dashboard" id="volver">
-        <span class="material-icons">
-            keyboard_return
-            </span>
-      </a>
+      <span class="material-icons">
+        keyboard_return
+      </span>
+    </a>
     <div id="viewer" class="spreads"></div>
     <span id="hiddenTitle"></span>
     <a id="prev" href="#prev" class="arrow">
@@ -54,58 +58,57 @@
       <i class="material-icons">close</i>
     </a>
     <h1 id="title">...</h1>
-    <image id="cover" width="150px"/>
+    <image id="cover" width="150px" />
     <h2 id="author">...</h2>
     <ul id="toc"></ul>
   </div>
-<script>
+  <script>
 
 
 
-async function validarToken() {
-  try {
+    async function validarToken() {
+      try {
 
 
-    var jwtToken = localStorage.getItem("token");
-    var myHeaders = new Headers();
-    myHeaders.append("Authorization", "Bearer " + jwtToken);
+        var jwtToken = localStorage.getItem("token");
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", "Bearer " + jwtToken);
 
-    var requestOptions = {
-      method: 'GET',
-      headers: myHeaders,
-      redirect: 'follow'
-    };
+        var requestOptions = {
+          method: 'GET',
+          headers: myHeaders,
+          redirect: 'follow'
+        };
 
-    const response = await fetch("https://api.startsyncx.com/api/secure", requestOptions);
-    const result = await response.json();
+        const response = await fetch("https://api.startsyncx.com/api/secure", requestOptions);
+        const result = await response.json();
 
-    if (result.status === true) {
+        if (result.status === true) {
 
+          return true;
 
-      return true;
+        } else if (result.status === false) {
+          console.log("Token inválido");
 
-    } else if (result.status === false) {
-      console.log("Token inválido");
+          const urlget = `/#!/login`;
+          window.location.href = urlget;
 
-      const urlget= `/#!/login`;
-        window.location.href = urlget;
+        } else {
+          console.log("Respuesta desconocida");
+        }
 
-    } else {
-      console.log("Respuesta desconocida");
+      } catch (error) {
+        console.error('Error en la solicitud fetch:', error);
+        throw error;
+      }
     }
 
-
-  } catch (error) {
-    console.error('Error en la solicitud fetch:', error);
-    throw error;
-  }
-}
-
-document.addEventListener('DOMContentLoaded', start('<%= bookId %>'), false);
+    document.addEventListener('DOMContentLoaded', start('<%= bookId %>'), false);
 
 
-validarToken()
+    validarToken()
 
-</script>
+  </script>
 </body>
+
 </html>
