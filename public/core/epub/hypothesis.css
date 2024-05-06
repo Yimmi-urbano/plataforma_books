@@ -246,9 +246,8 @@ svg {
     right: 40px;
   }
 }
-
 #viewer.spreads {
-  width: 84vw;
+  width: 95vw;
   height: 80vh;
   box-shadow: 0 0 4px #ccc;
   border-radius: 5px;
