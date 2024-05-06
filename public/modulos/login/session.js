@@ -81,7 +81,7 @@ export async function validarToken() {
 
     if (result.status === true) {
 
-      const sku = result.authData.user.sku[0]
+      const sku = result.authData.user.sku
       const merchant = result.authData.user.merchant;
       localStorage.setItem("sku", sku);
       localStorage.setItem("merchant", merchant);
