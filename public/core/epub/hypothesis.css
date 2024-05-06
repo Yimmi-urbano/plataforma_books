@@ -248,12 +248,12 @@ svg {
 }
 #viewer.spreads {
   width: 95vw;
-  height: 80vh;
+  height: 85vh;
   box-shadow: 0 0 4px #ccc;
   border-radius: 5px;
   padding: 0;
   position: relative;
-  margin: 10vh auto;
+  margin: 5vh auto;
   background: white;
   top: 0;
 }
