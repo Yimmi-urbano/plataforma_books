@@ -51,10 +51,27 @@ function obtenerTokenDeURL() {
   return null;
 }
 
+function obtenerSKUDeURL() {
+  var url = window.location.href;
+  var parametros = url.split('?')[1];
+  if (parametros) {
+      var tokens = parametros.split('&');
+      for (var i = 0; i < tokens.length; i++) {
+          var token = tokens[i].split('=');
+          if (token[0] === 'sku') {
+              return token[1];
+          }
+      }
+  }
+  return null;
+}
+
 async function almacenarTokenEnLocalStorage() {
   var token = obtenerTokenDeURL();
+  var skuDefined = obtenerSKUDeURL();
   if (token) {
       localStorage.setItem("token", token);
+      localStorage.setItem("sku", skuDefined);
       return true
   }
 }
@@ -83,7 +100,7 @@ export async function validarToken() {
 
       const sku = result.authData.user.sku
       const merchant = result.authData.user.merchant;
-      localStorage.setItem("sku", sku);
+      //localStorage.setItem("sku", sku);
       localStorage.setItem("merchant", merchant);
       return true;
 
